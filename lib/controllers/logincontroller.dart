@@ -4,12 +4,13 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:otp_text_field_v2/otp_field_v2.dart';
 import 'package:shopping_app/Screens/homepage.dart';
 import 'package:shopping_app/models/user/user.dart';
-import 'package:json_annotation/json_annotation.dart';
 
 class Logincontroller extends GetxController {
+  GetStorage box =GetStorage();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   late CollectionReference userCollection;
   TextEditingController registerNamectrl = TextEditingController();
@@ -20,11 +21,22 @@ class Logincontroller extends GetxController {
   int? otpsent;
   int? otpentered;
   bool loading = false;
+  User? Loggeduser;
 
   @override
   void onInit() {
     userCollection = firestore.collection('Users');
     super.onInit();
+  }
+
+  @override
+  void onReady() {
+    Map<String , dynamic> user=box.read("Loginuser");
+    if(user!=null){
+      Loggeduser=User.fromJson(user);
+      Get.to(Homepage());
+    }
+    super.onReady();
   }
 
   addUser() {
@@ -50,6 +62,8 @@ class Logincontroller extends GetxController {
           colorText: Colors.green);
       loading = false;
       update();
+      registerNumberctrl.clear();
+      registerNamectrl.clear();
       //  } //otp verification
       //  else{ //otp verification
       // Get.snackbar("Failed Attempt ", 'OTP is incoreect',colorText: Colors.red);//otp verification
@@ -102,6 +116,8 @@ class Logincontroller extends GetxController {
         if (quersnapshot.docs.isNotEmpty) {
           var userdoc = quersnapshot.docs.first;
           var userdata = userdoc.data() as Map<String, dynamic>;
+          box.write('Loginuser', userdata);
+          MobileNumberCtrl.clear();
           Get.snackbar('success', 'User Logged in successfully',
               colorText: Colors.green);
           Get.to(Homepage());

@@ -1,16 +1,20 @@
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:shopping_app/Screens/homepage.dart';
 import 'package:shopping_app/Screens/loginpage.dart';
 import 'package:shopping_app/Screens/registerpage.dart';
+import 'package:shopping_app/controllers/home_controller.dart';
 import 'package:shopping_app/controllers/logincontroller.dart';
 import 'package:shopping_app/firebase_options.dart';
 
 void main()async {
+  await GetStorage.init();
 WidgetsFlutterBinding.ensureInitialized();
 await Firebase.initializeApp(options:DefaultFirebaseOptions.currentPlatform);
 Get.put(Logincontroller());
+Get.put(HomeController());
   runApp(const MyApp());
 }
 
@@ -32,7 +36,7 @@ class MyApp extends StatelessWidget {
        ),
         useMaterial3: true,
       ),
-      home:Registerpage(),
+      home:Loginpage(),
     );
   }
 }

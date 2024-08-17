@@ -1,19 +1,19 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'user.dart';
+part of 'productcategory.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-User _$UserFromJson(Map<String, dynamic> json) => User(
+Productcategory _$ProductcategoryFromJson(Map<String, dynamic> json) =>
+    Productcategory(
       id: json['id'] as String?,
       Name: json['Name'] as String?,
-      MobileNo: (json['MobileNo'] as num?)?.toInt(),
     );
 
-Map<String, dynamic> _$UserToJson(User instance) => <String, dynamic>{
+Map<String, dynamic> _$ProductcategoryToJson(Productcategory instance) =>
+    <String, dynamic>{
       'id': instance.id,
       'Name': instance.Name,
-      'MobileNo': instance.MobileNo,
     };

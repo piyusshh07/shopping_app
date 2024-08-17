@@ -61,7 +61,7 @@ class Registerpage extends StatelessWidget {
             }
           }, child: Text(ctrl.otpfieldshown==true ? "Register": 'Send OTP')),
           TextButton(onPressed: (){
-            Get.to(Loginpage(),transition: Transition.cupertino);
+           Navigator.pop(context);
           },
               child: Text(
                 'Login to the app', style: TextStyle(color: Colors.black),)),
