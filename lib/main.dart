@@ -5,6 +5,7 @@ import 'package:get_storage/get_storage.dart';
 import 'package:shopping_app/Screens/homepage.dart';
 import 'package:shopping_app/Screens/loginpage.dart';
 import 'package:shopping_app/Screens/registerpage.dart';
+import 'package:shopping_app/controllers/Order_controller.dart';
 import 'package:shopping_app/controllers/home_controller.dart';
 import 'package:shopping_app/controllers/logincontroller.dart';
 import 'package:shopping_app/firebase_options.dart';
@@ -15,6 +16,7 @@ WidgetsFlutterBinding.ensureInitialized();
 await Firebase.initializeApp(options:DefaultFirebaseOptions.currentPlatform);
 Get.put(Logincontroller());
 Get.put(HomeController());
+Get.put(OrderController());
   runApp(const MyApp());
 }
 
@@ -24,6 +26,7 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    GetStorage box = GetStorage();
     return GetMaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
@@ -36,7 +39,8 @@ class MyApp extends StatelessWidget {
        ),
         useMaterial3: true,
       ),
-      home:Loginpage(),
+      home: box == null ? Loginpage() : Homepage(),
+
     );
   }
 }

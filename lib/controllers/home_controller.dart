@@ -8,6 +8,7 @@ class HomeController extends GetxController {
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   late CollectionReference productCollection;
   late CollectionReference  categoryCollection;
+  String brandname='';
   List<Product> products = [];
   List<Product> productshowinUI = [];
   List<Productcategory> productcategory=[];
@@ -65,5 +66,22 @@ class HomeController extends GetxController {
     productshowinUI=products.where((product)=>product.Category==Category).toList();
     update();
   }
+ filterByBrand(List<String> selectedBrands) {
+    if (selectedBrands.isEmpty) {
+      productshowinUI = products;
+    } else {
+      productshowinUI = products.where((product) => selectedBrands.contains(product.Brand)).toList();
+    }
+    update();
+  }
+  sortbyprice({required bool ascending}){
+    List<Product> sortedlist=List<Product>.from(productshowinUI);
+    sortedlist.sort((a,b)=> ascending ? a.Price!.compareTo(b.Price!) : b.Price!.compareTo(a.Price!));
+    productshowinUI=sortedlist;
+    update();
+  }
+
+
+
 
 }

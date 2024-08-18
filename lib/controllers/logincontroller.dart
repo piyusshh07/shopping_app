@@ -117,6 +117,7 @@ class Logincontroller extends GetxController {
           var userdoc = quersnapshot.docs.first;
           var userdata = userdoc.data() as Map<String, dynamic>;
           box.write('Loginuser', userdata);
+          print(box);
           MobileNumberCtrl.clear();
           Get.snackbar('success', 'User Logged in successfully',
               colorText: Colors.green);
