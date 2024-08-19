@@ -15,6 +15,7 @@ class Homepage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GetBuilder<HomeController>(builder: (ctrl) {
+      GetStorage box = GetStorage();
       return RefreshIndicator(
         onRefresh: ()async{
           ctrl.fetchproducts();
@@ -26,7 +27,6 @@ class Homepage extends StatelessWidget {
             automaticallyImplyLeading: false,
             actions: [
               IconButton(onPressed: () {
-                GetStorage box = GetStorage();
                 box.erase();
                 Get.offAll(Loginpage());
               }, icon: Icon(Icons.exit_to_app_rounded)),
@@ -90,7 +90,10 @@ class Homepage extends StatelessWidget {
                       Imageurl: ctrl.productshowinUI[index].ImageUrl ?? 'image not available',
                       offer: '20% off',
                       onTap: () {
-                      Get.to(Productdescription(),arguments: {'data':ctrl.productshowinUI[index]});
+                      Get.to(Productdescription(),
+                          arguments: {
+                        'data':ctrl.productshowinUI[index],
+                      });
                       },
                     );
                   },

@@ -22,6 +22,8 @@ class Logincontroller extends GetxController {
   int? otpentered;
   bool loading = false;
   User? Loggeduser;
+  int? loggedmobileNo;
+  String loggeduser='';
 
   @override
   void onInit() {
@@ -117,7 +119,9 @@ class Logincontroller extends GetxController {
           var userdoc = quersnapshot.docs.first;
           var userdata = userdoc.data() as Map<String, dynamic>;
           box.write('Loginuser', userdata);
-          print(box);
+          box.write('User', loggeduser);
+          box.write('Number', loggedmobileNo);
+
           MobileNumberCtrl.clear();
           Get.snackbar('success', 'User Logged in successfully',
               colorText: Colors.green);

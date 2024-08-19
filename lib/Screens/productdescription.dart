@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
+import 'package:get_storage/get_storage.dart';
 import 'package:shopping_app/controllers/Order_controller.dart';
 import 'package:shopping_app/controllers/home_controller.dart';
 import 'package:shopping_app/product/product.dart';
@@ -53,10 +54,14 @@ class Productdescription extends StatelessWidget {
                     )
                 ),
                 Center(child: ElevatedButton(onPressed: () {
+                  ctrl.price = product.Price?.toInt();
+                  ctrl.productname=product.ProductName ?? "No name";
+                  ctrl.image=product.ImageUrl ?? 'No image';
+                  ctrl.id=product.id!;
                   ctrl.buyProduct();
                 },
                     child: const Text(
-                      'Proceed to Buy', style: TextStyle(fontSize: 15),)))
+                      'Buy Now', style: TextStyle(fontSize: 15),)))
               ],
             ),
           ),
