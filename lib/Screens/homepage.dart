@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:shopping_app/Screens/loginpage.dart';
+import 'package:shopping_app/Screens/orders_screen.dart';
 import 'package:shopping_app/Screens/productdescription.dart';
 import 'package:shopping_app/Widgets/dropdown_multi.dart';
 import 'package:shopping_app/Widgets/dropdownbtn.dart';
@@ -17,7 +18,7 @@ class Homepage extends StatelessWidget {
     return GetBuilder<HomeController>(builder: (ctrl) {
       GetStorage box = GetStorage();
       return RefreshIndicator(
-        onRefresh: ()async{
+        onRefresh: () async {
           ctrl.fetchproducts();
         },
         child: Scaffold(
@@ -26,10 +27,18 @@ class Homepage extends StatelessWidget {
             centerTitle: true,
             automaticallyImplyLeading: false,
             actions: [
-              IconButton(onPressed: () {
-                box.erase();
-                Get.offAll(Loginpage());
-              }, icon: Icon(Icons.exit_to_app_rounded)),
+              IconButton(
+                  onPressed: () {
+                    Get.to(OrdersScreen());
+                    ctrl.fetchorders();
+                  },
+                  icon: Icon(Icons.shopping_bag)),
+              IconButton(
+                  onPressed: () {
+                    box.erase();
+                    Get.offAll(Loginpage());
+                  },
+                  icon: Icon(Icons.exit_to_app_rounded)),
             ],
           ),
           body: Column(
@@ -40,16 +49,18 @@ class Homepage extends StatelessWidget {
                     scrollDirection: Axis.horizontal,
                     itemCount: ctrl.productcategory.length,
                     itemBuilder: (context, index) {
-                      return
-                        InkWell(
-                          onTap: (){
-                            ctrl.filterbycategory(ctrl.productcategory[index].Name ?? '');
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.all(6),
-                            child: Chip(label: Text(ctrl.productcategory[index].Name ?? "Error")),
-                          ),
-                        );
+                      return InkWell(
+                        onTap: () {
+                          ctrl.filterbycategory(
+                              ctrl.productcategory[index].Name ?? '');
+                        },
+                        child: Padding(
+                          padding: const EdgeInsets.all(6),
+                          child: Chip(
+                              label: Text(
+                                  ctrl.productcategory[index].Name ?? "Error")),
+                        ),
+                      );
                     }),
               ),
               Padding(
@@ -73,7 +84,6 @@ class Homepage extends StatelessWidget {
                   ],
                 ),
               ),
-
               Expanded(
                 child: GridView.builder(
                   gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -85,15 +95,16 @@ class Homepage extends StatelessWidget {
                   itemCount: ctrl.productshowinUI.length,
                   itemBuilder: (ctx, index) {
                     return Productcard(
-                      Name: ctrl.productshowinUI[index].ProductName ?? 'No name',
-                      Price: ctrl.productshowinUI[index].Price?? 0,
-                      Imageurl: ctrl.productshowinUI[index].ImageUrl ?? 'image not available',
+                      Name:
+                          ctrl.productshowinUI[index].ProductName ?? 'No name',
+                      Price: ctrl.productshowinUI[index].Price ?? 0,
+                      Imageurl: ctrl.productshowinUI[index].ImageUrl ??
+                          'image not available',
                       offer: '20% off',
                       onTap: () {
-                      Get.to(Productdescription(),
-                          arguments: {
-                        'data':ctrl.productshowinUI[index],
-                      });
+                        Get.to(Productdescription(), arguments: {
+                          'data': ctrl.productshowinUI[index],
+                        });
                       },
                     );
                   },

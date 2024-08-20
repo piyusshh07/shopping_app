@@ -21,6 +21,9 @@ class Orders {
   @JsonKey(name: 'Address')
   String? Address;
 
+  @JsonKey(name: 'Datetime')
+  String? Datetime;
+
   @JsonKey(name: 'MobileNo')
   int? MobileNo;
 
@@ -32,7 +35,8 @@ class Orders {
     this.BoughtProductImage,
     this.MobileNo,
     this.UserName,
-    this.Address
+    this.Address,
+    this.Datetime
   });
 
   factory Orders.fromJson(Map<String, dynamic> json) => _$OrdersFromJson(json);

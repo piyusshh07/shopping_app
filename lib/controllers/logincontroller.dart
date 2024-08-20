@@ -10,7 +10,7 @@ import 'package:shopping_app/Screens/homepage.dart';
 import 'package:shopping_app/models/user/user.dart';
 
 class Logincontroller extends GetxController {
-  GetStorage box =GetStorage();
+  GetStorage box = GetStorage();
   FirebaseFirestore firestore = FirebaseFirestore.instance;
   late CollectionReference userCollection;
   TextEditingController registerNamectrl = TextEditingController();
@@ -23,7 +23,7 @@ class Logincontroller extends GetxController {
   bool loading = false;
   User? Loggeduser;
   int? loggedmobileNo;
-  String loggeduser='';
+  String loggeduser = '';
 
   @override
   void onInit() {
@@ -33,9 +33,9 @@ class Logincontroller extends GetxController {
 
   @override
   void onReady() {
-    Map<String , dynamic> user=box.read("Loginuser");
-    if(user!=null){
-      Loggeduser=User.fromJson(user);
+    Map<String, dynamic> user = box.read("Loginuser");
+    if (user != null) {
+      Loggeduser = User.fromJson(user);
       Get.to(Homepage());
     }
     super.onReady();
@@ -118,6 +118,8 @@ class Logincontroller extends GetxController {
         if (quersnapshot.docs.isNotEmpty) {
           var userdoc = quersnapshot.docs.first;
           var userdata = userdoc.data() as Map<String, dynamic>;
+          var loggeduser = userdata['Name']; // Example field
+          var loggedmobileNo = userdata['MobileNo']; // Example field
           box.write('Loginuser', userdata);
           box.write('User', loggeduser);
           box.write('Number', loggedmobileNo);

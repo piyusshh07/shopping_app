@@ -13,7 +13,8 @@ Orders _$OrdersFromJson(Map<String, dynamic> json) => Orders(
       BoughtProductImage: json['BoughtProductImage'] as String?,
       MobileNo: (json['MobileNo'] as num?)?.toInt(),
       UserName: json['UserName'] as String?,
-      Address: json['Address'] as String?
+      Address: json['Address'] as String?,
+      Datetime: json['Datetime'] as String?,
     );
 
 Map<String, dynamic> _$OrdersToJson(Orders instance) => <String, dynamic>{
@@ -24,4 +25,5 @@ Map<String, dynamic> _$OrdersToJson(Orders instance) => <String, dynamic>{
       'UserName': instance.UserName,
       'MobileNo': instance.MobileNo,
       'Address' : instance.Address,
+      'Datetime' : instance.Datetime
     };
