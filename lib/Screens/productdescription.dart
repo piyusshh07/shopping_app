@@ -1,9 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
-import 'package:get_storage/get_storage.dart';
+
 import 'package:shopping_app/controllers/Order_controller.dart';
-import 'package:shopping_app/controllers/home_controller.dart';
 import 'package:shopping_app/product/product.dart';
 
 class Productdescription extends StatelessWidget {
@@ -36,7 +35,7 @@ class Productdescription extends StatelessWidget {
                       color: Colors.black,
                       fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+               const SizedBox(
                   height: 10,
                 ),
                 Text(
@@ -46,7 +45,7 @@ class Productdescription extends StatelessWidget {
                       color: Colors.green,
                       fontWeight: FontWeight.bold),
                 ),
-                SizedBox(
+               const SizedBox(
                   height: 10,
                 ),
                 Text(
@@ -54,7 +53,7 @@ class Productdescription extends StatelessWidget {
                   style: TextStyle(fontSize: 16, color: Colors.black),
                   maxLines: 10,
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 TextField(
@@ -69,7 +68,6 @@ class Productdescription extends StatelessWidget {
                           ctrl.price = product.Price?.toInt();
                           ctrl.productname = product.ProductName ?? "No name";
                           ctrl.image = product.ImageUrl ?? 'No image';
-                          ctrl.id = product.id!;
                           ctrl.buyProduct();
                         },
                         child: ctrl.Loading

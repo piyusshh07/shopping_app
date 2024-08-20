@@ -12,7 +12,9 @@ class OrdersScreen extends StatelessWidget {
             appBar: AppBar(
               title: const Text('My Orders'),
             ),
-            body: ListView.builder(
+            body: ctrl.orders.isEmpty
+                ? const Center(child: Text('No orders yet !!!'))
+                :  ListView.builder(
                 itemCount: ctrl.orders.length,
                 itemBuilder: (ctx, index) {
                   return Padding(

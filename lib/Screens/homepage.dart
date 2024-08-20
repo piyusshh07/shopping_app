@@ -33,13 +33,24 @@ class Homepage extends StatelessWidget {
                     ctrl.fetchorders();
                   },
                   icon: Icon(Icons.shopping_bag)),
-              IconButton(
-                  onPressed: () {
-                    box.erase();
-                    Get.offAll(Loginpage());
-                  },
-                  icon: Icon(Icons.exit_to_app_rounded)),
+        PopupMenuButton(
+          itemBuilder: (ctx) => [
+            PopupMenuItem(
+              child: Row(
+                children: [
+                  Icon(Icons.login),
+                  SizedBox(width: 20),
+                  Container(width: 100, child: Text('Logout')),
+                ],
+              ),
+              onTap: () {
+                box.erase();
+                Get.offAll(Loginpage());
+              },
+            )
             ],
+          )
+      ]
           ),
           body: Column(
             children: [

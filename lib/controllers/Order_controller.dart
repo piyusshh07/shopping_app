@@ -13,7 +13,6 @@ class OrderController extends GetxController{
   TextEditingController addressctrl =TextEditingController();
   bool Loading=false;
   String image='';
-  String id='';
   int? price;
   String productname='';
   String currentdate=DateFormat('d MMM y').format(DateTime.now());
@@ -41,7 +40,7 @@ class OrderController extends GetxController{
         ProductPrice: price!.toDouble(),
         MobileNo: mobno,
         BoughtProductImage: image,
-        id: id,
+        id: reference.id,
         UserName: user,
         Address : addressctrl.text,
         Datetime: currentdate,
